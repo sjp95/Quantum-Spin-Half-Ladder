@@ -41,8 +41,8 @@ Leg 2:   ●───●───●───●───●
 
 ## Physical Picture
 
-* The **leg coupling** ((S^x S^x)) introduces transverse quantum fluctuations.
-* The **rung coupling** ((S^z S^z)) favors correlations along the (z)-direction.
+* The **leg coupling** (($S^x S^x$)) introduces transverse quantum fluctuations.
+* The **rung coupling** (($S^z S^z$)) favors correlations along the (z)-direction.
 * The **magnetic field** competes with interactions by polarizing spins.
 
 The interplay of these terms can give rise to nontrivial quantum phases, including anisotropic ordering and field-driven transitions.
@@ -60,7 +60,7 @@ The interplay of these terms can give rise to nontrivial quantum phases, includi
 
 ## Future Extensions
 
-* Phase diagram as a function of (J_{\parallel}, J_{\perp}, h)
+* Phase diagram as a function of ($J_{\parallel}, J_{\perp}, h$)
 * Entanglement entropy and scaling analysis
 * Dynamical properties using time-evolution (tDMRG / TEBD)
 

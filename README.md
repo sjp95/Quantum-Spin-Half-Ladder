@@ -34,8 +34,8 @@ Leg 2:   ●───●───●───●───●
 ### Legend
 
 * `●` : Spin-1/2 site
-* `───` : Leg interaction ((J_{\parallel} S^x_i S^x_j))
-* `│`   : Rung interaction ((J_{\perp} S^z_i S^z_j))
+* `───` : Leg interaction (($J_{\parallel} S^x_i S^x_j$))
+* `│`   : Rung interaction (($J_{\perp} S^z_i S^z_j$))
 
 ---
 

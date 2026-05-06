@@ -101,10 +101,24 @@ def second_derivative_4th_order(x, y):
         d2[i] = (-y[i + 2] + 16 * y[i + 1] - 30 * y[i] + 16 * y[i - 1] - y[i - 2]) / (12 * h * h)
 
     # Edge points: 2nd-order fallback
-    d2[0] = (y[0] - 2 * y[1] + y[2]) / (h * h)
-    d2[1] = (y[0] - 2 * y[1] + y[2]) / (h * h)
-    d2[-2] = (y[-3] - 2 * y[-2] + y[-1]) / (h * h)
-    d2[-1] = (y[-3] - 2 * y[-2] + y[-1]) / (h * h)
+    
+
+    if n >= 5:
+        # Index 1 and -2 can use standard 2nd-order central differences
+        d2[1] = (y[0] - 2 * y[1] + y[2]) / (h**2)
+        d2[-2] = (y[-3] - 2 * y[-2] + y[-1]) / (h**2)
+
+        # Index 0 requires a 2nd-order FORWARD difference stencil for the 2nd derivative
+        d2[0] = (2 * y[0] - 5 * y[1] + 4 * y[2] - y[3]) / (h**2)
+
+        # Index -1 requires a 2nd-order BACKWARD difference stencil for the 2nd derivative
+        d2[-1] = (2 * y[-1] - 5 * y[-2] + 4 * y[-3] - y[-4]) / (h**2)
+    else:
+        d2[0] = (y[0] - 2 * y[1] + y[2]) / (h * h)
+        d2[1] = (y[0] - 2 * y[1] + y[2]) / (h * h)
+        d2[-2] = (y[-3] - 2 * y[-2] + y[-1]) / (h * h)
+        d2[-1] = (y[-3] - 2 * y[-2] + y[-1]) / (h * h)
+
     return d2
 
 # Compute second derivative (d²E/dhz²)

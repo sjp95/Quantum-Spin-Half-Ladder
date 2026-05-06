@@ -11,13 +11,7 @@ Numerical calculations will be performed using the Matrix Product State (MPS) fo
 
 The Hamiltonian of the system is given by:
 
-$$
-H = J_{\parallel} \sum_{\langle i,j \rangle \in \text{legs}} S_i^x S_j^x
-
-* J_{\perp} \sum_{\langle i,j \rangle \in \text{rungs}} S_i^z S_j^z
-
-- h \sum_i S_i^z
-  $$
+$$ H = J_{\parallel} \sum_{\langle i,j \rangle \in \text{legs}} S_i^x S_j^x +J_{\perp} \sum_{\langle i,j \rangle \in \text{rungs}} S_i^z S_j^z- h \sum_i S_i^z $$
 
 ### Parameters
 

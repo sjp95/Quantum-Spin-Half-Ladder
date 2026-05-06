@@ -105,8 +105,8 @@ let
     mz00+=magz[i]/Kitayev.N
     mx00+=magx[i]/Kitayev.N
   end
-  println(file3, "$Kitayev.h  $Kitayev.Jx $Kitayev.Jz  $(mz00)  $(mx00)")
-  println(file4, "$Kitayev.h  $Kitayev.Jx $Kitayev.Jz  $energy")
+  println(file3, "$(Kitayev.hz)  $(Kitayev.Jx)  $(Kitayev.Jz)  $(mz00)  $(mx00)")
+  println(file4, "$(Kitayev.hz)  $(Kitayev.Jx)  $(Kitayev.Jz)  $(energy)")
   #===========================================================================#
   close(file)
   close(file1)

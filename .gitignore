@@ -5,8 +5,10 @@
 *.png
 *.jpg
 *.jpeg
+*.key
 .DS_Store
 *.tar.gz
+*.tar.xz
 *.h5
 *.sge
 *.log

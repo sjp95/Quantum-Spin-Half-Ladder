@@ -58,6 +58,20 @@ The interplay of these terms can give rise to nontrivial quantum phases, includi
   * Correlation functions
   * Magnetization
 
+## Exact Diagonalisation (C++) Dependency
+
+The exact diagonalisation (ED) code written in C++ uses the **Eigen** linear algebra library.
+
+* Eigen website: https://libeigen.gitlab.io/
+* Eigen is header-only and can be included directly in this project.
+* Eigen (since v3.1.1) is primarily licensed under **MPL 2.0**.
+
+If Eigen source files are redistributed with this repository:
+
+* Keep Eigen license/copyright notices intact.
+* If any Eigen files are modified, those modified Eigen files must remain under MPL 2.0.
+* This repository can use a separate license for project-specific source code.
+
 ## Future Extensions
 
 * Phase diagram as a function of ($J_{\parallel}, J_{\perp}, h$)

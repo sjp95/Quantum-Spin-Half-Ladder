@@ -23,8 +23,8 @@ let
   #===========================================================================#
   
   Kitayev.Values()
-  Kitayev.printMatrix(Kitayev.JJx)
-  Kitayev.printMatrix(Kitayev.JJz)
+  # Kitayev.printMatrix(Kitayev.JJx)
+  # Kitayev.printMatrix(Kitayev.JJz)
 
   #===========================================================================#
  H = Kitayev.Hamiltonian()  # Hamiltonian

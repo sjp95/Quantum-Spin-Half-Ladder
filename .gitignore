@@ -8,3 +8,5 @@
 .DS_Store
 *.tar.gz
 *.h5
+*.sge
+*.log

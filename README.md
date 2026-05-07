@@ -65,12 +65,7 @@ The exact diagonalisation (ED) code written in C++ uses the **Eigen** linear alg
 * Eigen website: https://libeigen.gitlab.io/
 * Eigen is header-only and can be included directly in this project.
 * Eigen (since v3.1.1) is primarily licensed under **MPL 2.0**.
-
-If Eigen source files are redistributed with this repository:
-
-* Keep Eigen license/copyright notices intact.
-* If any Eigen files are modified, those modified Eigen files must remain under MPL 2.0.
-* This repository can use a separate license for project-specific source code.
+* If anyone wants to modify any Eigen file, those modified Eigen files must remain under MPL 2.0.
 
 ## Future Extensions
 

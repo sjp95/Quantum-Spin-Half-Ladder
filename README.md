@@ -72,4 +72,7 @@ The exact diagonalisation (ED) code written in C++ uses the **Eigen** linear alg
 * Phase diagram as a function of ($J_{\parallel}, J_{\perp}, h$)
 * Entanglement entropy and scaling analysis
 * Dynamical properties using time-evolution (tDMRG / TEBD)
+* Add HDF5 file support for data handling, which will make it easier to store large simulation outputs efficiently, organize datasets cleanly, and improve portability across different analysis tools.
+
+
 

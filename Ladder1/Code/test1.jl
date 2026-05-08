@@ -35,7 +35,7 @@ let
   state = [isodd(n) ? "Up" : "Dn" for n=1:N]
   # state[4]="Emp"
   # state[15]="Emp"
-  psi0 = MPS(Kitayev.sites,state)
+  psi0 = MPS(Kitayev.sites,state) #Specific input
   #psi0 = random_mps(Kitayev.sites; linkdims=100)
   @show flux(psi0)
   nsweeps = 20

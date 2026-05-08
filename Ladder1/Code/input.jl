@@ -83,13 +83,13 @@ function Hamiltonian()
     os = OpSum()
     for j=1:N-1
         if(j%2==1)
-            os += JJz[j,j+1]*0.25,"Sz",j,"Sz",j+1
+            os += JJz[j,j+1]*0.25,"Sz",j,"Sz",j+1 # with propar sx 
             if j+3 <= N
                 # os += JJx[j,j+3]*0.25,"S+",j,"S-",j+3
                 # os += JJx[j,j+3]*0.25,"S-",j,"S+",j+3
                 # os += JJx[j,j+3]*0.25,"S+",j,"S+",j+3
                 # os += JJx[j,j+3]*0.25,"S-",j,"S-",j+3
-                os += JJx[j,j+3],"Sx",j,"Sx",j+3
+                os += JJx[j,j+3],"Sx",j,"Sx",j+3 # with propar sx
             end
         else
             # os += JJx[j,j+1]*0.25,"S+",j,"S-",j+1

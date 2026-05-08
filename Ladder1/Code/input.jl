@@ -85,16 +85,18 @@ function Hamiltonian()
         if(j%2==1)
             os += JJz[j,j+1]*0.25,"Sz",j,"Sz",j+1
             if j+3 <= N
-                os += JJx[j,j+3]*0.25,"S+",j,"S-",j+3
-                os += JJx[j,j+3]*0.25,"S-",j,"S+",j+3
-                os += JJx[j,j+3]*0.25,"S+",j,"S+",j+3
-                os += JJx[j,j+3]*0.25,"S-",j,"S-",j+3
+                # os += JJx[j,j+3]*0.25,"S+",j,"S-",j+3
+                # os += JJx[j,j+3]*0.25,"S-",j,"S+",j+3
+                # os += JJx[j,j+3]*0.25,"S+",j,"S+",j+3
+                # os += JJx[j,j+3]*0.25,"S-",j,"S-",j+3
+                os += JJx[j,j+3],"Sx",j,"Sx",j+3
             end
         else
-            os += JJx[j,j+1]*0.25,"S+",j,"S-",j+1
-            os += JJx[j,j+1]*0.25,"S-",j,"S+",j+1
-            os += JJx[j,j+1]*0.25,"S+",j,"S+",j+1
-            os += JJx[j,j+1]*0.25,"S-",j,"S-",j+1
+            # os += JJx[j,j+1]*0.25,"S+",j,"S-",j+1
+            # os += JJx[j,j+1]*0.25,"S-",j,"S+",j+1
+            # os += JJx[j,j+1]*0.25,"S+",j,"S+",j+1
+            # os += JJx[j,j+1]*0.25,"S-",j,"S-",j+1
+            os += JJx[j,j+1],"Sx",j,"Sx",j+1
         end
         
         os += -hz,"Sz",j,"I",j+1

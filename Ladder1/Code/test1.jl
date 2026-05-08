@@ -32,14 +32,18 @@ let
   #===========================================================================#
      #================= DMRG to claculate Groundstate ===================#
   #===========================================================================#
-  psi0 = random_mps(Kitayev.sites; linkdims=100)
+  state = [isodd(n) ? "Up" : "Dn" for n=1:N]
+  # state[4]="Emp"
+  # state[15]="Emp"
+  psi0 = MPS(Kitayev.sites,state)
+  #psi0 = random_mps(Kitayev.sites; linkdims=100)
   @show flux(psi0)
   nsweeps = 20
   noise = [1e-3, 1e-6, 1e-8, 1e-10, 1e-12]
   maxdim = [10, 20, 100, 500, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
   cutoff = [1E-10]
   energy, psi = dmrg(H, psi0; nsweeps, maxdim, cutoff, noise)
-  println("\n Groundstate Energy: $energy \n")
+  println("\n Groundstate Energy: $energy \n") 
   #===========================================================================#
   #===========================================================================#
 

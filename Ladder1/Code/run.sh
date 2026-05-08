@@ -38,8 +38,8 @@ export JULIA_NUM_THREADS=4
 #========================================================================================================================================
 
 #julia --sysimage /home/subhajyoti/.julia/sysimages/sys_itensors.so test1.jl 30 1 1 0 2 2
-julia --sysimage /home/subhajyoti/.julia/sysimages/sys_itensors.so test1.jl 60 1 1 0.5 #2 2
-julia --sysimage /home/subhajyoti/.julia/sysimages/sys_itensors.so test2.jl 60 1 1 0 2 2 0.5
+# julia --sysimage /home/subhajyoti/.julia/sysimages/sys_itensors.so test1.jl 60 1 1 0.5 #2 2
+# julia --sysimage /home/subhajyoti/.julia/sysimages/sys_itensors.so test2.jl 60 1 1 0 2 2 0.5
 
 #julia --sysimage /home/subhajyoti/.julia/sysimages/sys_itensors.so test_test2.jl 60 1 1 0 5
 
@@ -54,3 +54,11 @@ julia --sysimage /home/subhajyoti/.julia/sysimages/sys_itensors.so test2.jl 60 1
 #         done
 #     done
 # done
+
+for hz in $(seq 0.52 0.02 0.7) 
+do
+ for Jz in 1.0 #$(seq 1.0 -0.02 0.0)
+ do
+  julia test1.jl 100 1.0 $Jz $hz &
+ done
+done

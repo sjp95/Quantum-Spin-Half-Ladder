@@ -74,5 +74,15 @@ The exact diagonalisation (ED) code written in C++ uses the **Eigen** linear alg
 * Dynamical properties using time-evolution (tDMRG / TEBD)
 * Add HDF5 file support for data handling, which will make it easier to store large simulation outputs efficiently, organize datasets cleanly, and improve portability across different analysis tools.
 
+## Third-party dependencies
+
+This project vendors the following open-source libraries:
+
+- HighFive (BSD-3-Clause)
+  https://github.com/BlueBrain/HighFive
+
+- Eigen (MPL 2.0)
+  https://eigen.tuxfamily.org
+
 
 

@@ -79,7 +79,7 @@ The exact diagonalisation (ED) code written in C++ uses the **Eigen** linear alg
 This project vendors the following open-source libraries:
 
 - HighFive (BSD-3-Clause)
-  https://github.com/BlueBrain/HighFive
+  https://github.com/BlueBrain/HighFive.git
 
 - Eigen (MPL 2.0)
   https://eigen.tuxfamily.org

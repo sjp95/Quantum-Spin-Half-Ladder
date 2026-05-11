@@ -1,6 +1,7 @@
 *.dat
 *.pdf
 *.txt
+!CMakeLists.txt
 *.job
 *.png
 *.jpg
@@ -12,3 +13,5 @@
 *.h5
 *.sge
 *.log
+bin/
+build/

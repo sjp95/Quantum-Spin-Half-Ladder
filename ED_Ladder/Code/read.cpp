@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
     double hz  = stod(argv[4]);
 
     string infile =
-        "../Data/results_" +
+        "../Data/Eigen/EigenSpectrum_" +
         to_string(N) + "_" +
         to_string(int(J1 * 100.0)) + "_" +
         to_string(int(J2 * 100.0)) + "_" +
@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
         ".h5";
 
     try {
-        HighFive::File file(infile, HighFive::File::ReadOnly);
+         HighFive::File file(infile, HighFive::File::ReadOnly);
 
         VectorXd eigenvalues;
         MatrixXcd eigenvectors;

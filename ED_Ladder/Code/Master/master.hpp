@@ -92,8 +92,8 @@ void input:: mu_phi()
     // file.createDataSet("eigenvalues", es);
     // file.createDataSet("eigenvectors", evs);
 
-    bool tut=createDirectory("../Data");
-    std::string outfile ="../Data/results_" + std::to_string(N) + "_" +    std::to_string(int(J1*100.0)) + "_" +    std::to_string(int(J2*100.0)) + "_" +    std::to_string(int(hz*100.0)) +  ".h5";
+    bool tut=createDirectory("../Data/Eigen");
+    std::string outfile ="../Data/Eigen/EigenSpectrum_" + std::to_string(N) + "_" +    std::to_string(int(J1*100.0)) + "_" +    std::to_string(int(J2*100.0)) + "_" +    std::to_string(int(hz*100.0)) +  ".h5";
 
     try {
         HighFive::File file(outfile, HighFive::File::Overwrite);

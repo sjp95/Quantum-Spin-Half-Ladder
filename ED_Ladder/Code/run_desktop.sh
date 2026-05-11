@@ -56,7 +56,7 @@
 set -e
 
 mkdir -p build
-mkdir -p Data
+#mkdir -p Data
 
 cmake -S . -B build
 cmake --build build -j$(nproc)

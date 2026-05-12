@@ -17,6 +17,7 @@ complex<double> input::diagonal(int n)
 {
     complex <double> D=complex <double>(0,0);
     VectorXcd nnt = VectorXcd :: Zero(N);
+    //int m = n;
     
     for ( int i =0; i<N; i++)
     {
@@ -35,7 +36,7 @@ complex<double> input::diagonal(int n)
             D+= Jz(i,j)* nnt(i)* nnt(j);
         }
     }
-    //std::cout<< nnt.transpose() <<endl;
+    //std::cout<< m <<"  |"<< nnt.transpose()<<">  "<<D<<endl;
     //cout<< D <<endl;
     
     return D;

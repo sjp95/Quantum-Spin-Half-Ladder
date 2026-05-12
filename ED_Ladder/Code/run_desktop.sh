@@ -25,42 +25,72 @@
 
 # done
 
+
+#=============================================================================#
+# This script compiles and runs the desktop version of the program Without MKL
+#=============================================================================#
 #!/bin/bash
 # set -e
 
 # mkdir -p build
-# cd build
-
-# cmake ..
-# make -j$(nproc)
-
-# ./s1 4 0 1 1 0
-
-
-#!/bin/bash
-# set -e
-
-# mkdir -p build
-# # mkdir -p Data
+# #mkdir -p Data
 
 # cmake -S . -B build
 # cmake --build build -j$(nproc)
 
 # ./build/s1 4 0 1 1 0
-
-
-# ./build/r1 4 0 1 1 0
-
+# echo "Running read.cpp to read the results from HDF5 file..."
+#./build/r1 4 1.0 1.0 0.0
+#=============================================================================#
+# This script compiles and runs the desktop version of the program With MKL
+#=============================================================================#
 
 #!/bin/bash
 set -e
 
+# Initialize oneAPI environment for runtime libraries
+if [ -f "/opt/intel/oneapi/setvars.sh" ]; then
+    source /opt/intel/oneapi/setvars.sh --force
+fi
+
+# Performance tuning: Use all physical cores
+export MKL_NUM_THREADS=$(nproc)
+export OMP_NUM_THREADS=$(nproc)
+
+# Force Eigen to use MKL backend (if s3.cpp includes Eigen)
+export EIGEN_USE_MKL_ALL=1
+
 mkdir -p build
-#mkdir -p Data
 
 cmake -S . -B build
 cmake --build build -j$(nproc)
 
+echo "Starting execution with $MKL_NUM_THREADS threads..."
 ./build/s1 4 0 1 1 0
- echo "Running read.cpp to read the results from HDF5 file..."
-./build/r1 4 1.0 1.0 0.0
+
+
+#=============================================================================#
+# Alternative
+#=============================================================================#
+#!/bin/bash
+# set -e
+
+# if [ -f "/opt/intel/oneapi/setvars.sh" ]; then
+#     source /opt/intel/oneapi/setvars.sh --force
+# fi
+
+# export OMP_NUM_THREADS=$(nproc)
+# export MKL_NUM_THREADS=1
+# export MKL_DYNAMIC=FALSE
+
+# mkdir -p build
+# #mkdir -p Data
+
+# cmake -S . -B build
+# cmake --build build -j$(nproc)
+
+# echo "Running with OMP=$OMP_NUM_THREADS MKL=$MKL_NUM_THREADS"
+
+# ./build/s1 4 0 1 1 0
+#=============================================================================#
+#=============================================================================#

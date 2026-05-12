@@ -84,15 +84,17 @@ void input:: mu_phi()
 {
     
     Hspin();  
+    
+
+    cout<< "==============================="<<endl;
+    cout<< "H: "<<endl;
+    cout<< H(0,0) <<endl;
+    cout<< "==============================="<<endl;
+    basis_print();
+    cout<< "==============================="<<endl;
     pair<MatrixXcd, VectorXd> e = Eigenspectrum(H);
     es=e.second;
     evs=e.first;
-    //basis_print();
-    
-
-    // HighFive::File file("results.h5", HighFive::File::Overwrite);
-    // file.createDataSet("eigenvalues", es);
-    // file.createDataSet("eigenvectors", evs);
 
     bool tut=createDirectory("../Data/Eigen");
     std::string outfile ="../Data/Eigen/EigenSpectrum_" + std::to_string(N) + "_" +    std::to_string(int(J1*100.0)) + "_" +    std::to_string(int(J2*100.0)) + "_" +    std::to_string(int(hz*100.0)) +  ".h5";

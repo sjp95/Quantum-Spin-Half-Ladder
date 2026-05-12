@@ -50,6 +50,8 @@ class input
         void output();   
         bool createDirectory(const std::string& path);
         //void QFI(double q);
+        void Sx();
+        void Sz();
     public:
         // void total_converge(double U1);
         // void U_phi(double U1);

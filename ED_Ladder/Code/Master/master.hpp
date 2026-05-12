@@ -9,6 +9,8 @@
 #include <highfive/H5File.hpp>
 #include <highfive/eigen.hpp>
 #include "creat_directory.hpp"
+#include "Operators/sx.hpp"
+#include "Operators/sz.hpp"
 //#include "Operators/QFI.hpp"
 // #include "Rotor/spinconverge.hpp"
 // #include "Rotor/oioj.hpp"
@@ -108,6 +110,8 @@ void input:: mu_phi()
 
     
     //QFI(M_PI);
+    Sx();
+    Sz();
     
     //cout<< es <<"\n"<<endl;
     //cout<< evs.col(0) <<endl;

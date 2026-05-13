@@ -66,14 +66,22 @@ cmake -S . -B build
 cmake --build build -j$(nproc)
 
 echo "Starting execution with $MKL_NUM_THREADS threads..."
-for hz in $(seq 0.52 0.02 0.7) 
-do
-./build/s1 4 0 1 1 $hz
-done    
+# for hz in 0.7 #$(seq 0.52 0.02 0.7) 
+# do
+# ./build/s1 12 0 1 1 $hz
+# done    
 
-python3 Ed2h.py 4 1.0 1.0
-cd ..
-python3 plotEd2h.py 4 1.0 1.0
+for hz in $(seq 0.82 0.02 1.0) 
+do
+ for Jz in 1.0 #$(seq 1.0 -0.02 0.0)
+ do
+  ./build/s1 12 0 1.0 $Jz $hz 
+ done
+done
+
+# python3 Ed2h.py 4 1.0 1.0
+# cd ..
+#python3 plotEd2h.py 4 1.0 1.0
 
 #=============================================================================#
 # Alternative

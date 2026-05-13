@@ -75,11 +75,81 @@ using namespace Eigen;
 
 //========================================================================================//
 //========================================================================================//
+// void input::Sx()
+// {
+//     createDirectory("../Data/Magnetization/Sx");
+    
+//     //------------------------------------------------//
+//     std::string outfile =
+//         "../Data/Magnetization/Sx/Sx_" +
+//         std::to_string(N) + "_" +
+//         std::to_string(int(J1*100.0)) + "_" +
+//         std::to_string(int(J2*100.0)) + "_" +
+//         std::to_string(int(hz*100.0)) + ".dat";
+
+//     std::ofstream file(outfile);
+//     //------------------------------------------------//
+
+//     VectorXcd sxi = VectorXcd::Zero(N);
+
+//     #pragma omp parallel
+//     {
+//         VectorXcd local_sxi = VectorXcd::Zero(N);
+
+//         #pragma omp for schedule(static)
+//         for(int n = 0; n < le; n++)
+//         {
+//             for(int k1 = 0; k1 < N; k1++)
+//             {
+//                 int state = n;
+//                 long long bi1 = 0;
+//                 double factor = 0;
+//                 int mult = 1;
+
+//                 for(int j = 0; j < N; j++)
+//                 {
+//                     int reminder = state % Ls;
+//                     state /= Ls;
+
+//                     if(j == k1)
+//                     {
+//                         if(reminder < Ls-1)
+//                             reminder++;
+//                         else
+//                             reminder--;
+
+//                         factor = 1;
+//                     }
+
+//                     bi1 += reminder * mult;
+//                     mult *= Ls;
+//                 }
+
+//                 int q = int(bi1);
+
+//                 if(q != n)
+//                     local_sxi(k1) += conj(evs(q,0))*evs(n,0)*factor;
+//             }
+//         }
+
+//         #pragma omp critical
+//         sxi += local_sxi;
+//     }
+
+//     double total = sxi.real().sum();
+
+//     file << hz << " "
+//          << J1 << " "
+//          << J2 << " "
+//          << total << endl;
+// }
+
+//========================================================================================//
+//========================================================================================//
 void input::Sx()
 {
     createDirectory("../Data/Magnetization/Sx");
-    
-    //------------------------------------------------//
+
     std::string outfile =
         "../Data/Magnetization/Sx/Sx_" +
         std::to_string(N) + "_" +
@@ -88,60 +158,48 @@ void input::Sx()
         std::to_string(int(hz*100.0)) + ".dat";
 
     std::ofstream file(outfile);
-    //------------------------------------------------//
 
-    VectorXcd sxi = VectorXcd::Zero(N);
+    const auto* psi = evs.col(0).data();
 
-    #pragma omp parallel
+    double total = 0.0;
+
+    #pragma omp parallel for reduction(+:total) schedule(static)
+    for(int n = 0; n < le; n++)
     {
-        VectorXcd local_sxi = VectorXcd::Zero(N);
+        std::vector<int> spin(N);
 
-        #pragma omp for schedule(static)
-        for(int n = 0; n < le; n++)
+        int temp = n;
+
+        for(int j=0;j<N;j++)
         {
-            for(int k1 = 0; k1 < N; k1++)
-            {
-                int state = n;
-                long long bi1 = 0;
-                double factor = 0;
-                int mult = 1;
-
-                for(int j = 0; j < N; j++)
-                {
-                    int reminder = state % Ls;
-                    state /= Ls;
-
-                    if(j == k1)
-                    {
-                        if(reminder < Ls-1)
-                            reminder++;
-                        else
-                            reminder--;
-
-                        factor = 1;
-                    }
-
-                    bi1 += reminder * mult;
-                    mult *= Ls;
-                }
-
-                int q = int(bi1);
-
-                if(q != n)
-                    local_sxi(k1) += conj(evs(q,0))*evs(n,0)*factor;
-            }
+            spin[j] = temp % Ls;
+            temp /= Ls;
         }
 
-        #pragma omp critical
-        sxi += local_sxi;
-    }
+        double local = 0.0;
 
-    double total = sxi.real().sum();
+        for(int k=0;k<N;k++)
+        {
+            int q = n;
+
+            if(spin[k] == 0)
+                q += Lspow[k];
+            else
+                q -= Lspow[k];
+
+            local += std::real(std::conj(psi[q]) * psi[n]) * 0.5;
+        }
+
+        total += local;
+    }
 
     file << hz << " "
          << J1 << " "
          << J2 << " "
-         << total << endl;
+         << total/double(N)
+         << std::endl;
 }
+//========================================================================================//
+//========================================================================================//
 
 #endif

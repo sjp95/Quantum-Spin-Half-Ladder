@@ -46,6 +46,7 @@ class input
         void insidehoping( int i);         //| Formation                      |  T  
         complex<double> diagonal(int n);   //| Subroutin                      |  O
         void Hspin();                      //| for Rotor                      |  R
+        std::vector<int> Lspow;
         //===========================//                                       |
         void output();   
         bool createDirectory(const std::string& path);

@@ -13,55 +13,161 @@ using namespace Eigen;
 //================================================//
             //=== Diagonal element ===//
 //================================================//
-complex<double> input::diagonal(int n)
-{
-    complex <double> D=complex <double>(0,0);
-    VectorXcd nnt = VectorXcd :: Zero(N);
-    //int m = n;
+// complex<double> input::diagonal(int n)
+// {
+//     complex <double> D=complex <double>(0,0);
+//     VectorXcd nnt = VectorXcd :: Zero(N);
+//     //int m = n;
     
-    for ( int i =0; i<N; i++)
-    {
-        double reminder = n%Ls;
-        n=n/Ls;
-        double nt = double(reminder-1.0/2.0);
-        nnt(i)=complex<double>(nt,0.0);
-        D+=- hz*nt;
-    }
-    //cout<< D <<endl;
+//     for ( int i =0; i<N; i++)
+//     {
+//         double reminder = n%Ls;
+//         n=n/Ls;
+//         double nt = double(reminder-1.0/2.0);
+//         nnt(i)=complex<double>(nt,0.0);
+//         D+=- hz*nt;
+//     }
+//     //cout<< D <<endl;
+//     for (int i = 0; i < N; i++)
+//     {
+//         for (int j = i+1; j < N; j++)
+//         if(abs(Jz(i,j))>0)
+//         {
+//             D+= Jz(i,j)* nnt(i)* nnt(j);
+//         }
+//     }
+//     //std::cout<< m <<"  |"<< nnt.transpose()<<">  "<<D<<endl;
+//     //cout<< D <<endl;
+    
+//     return D;
+// }
+
+complex<double> input::diagonal(int state)
+{
+    double D = 0.0;
+    std::vector<double> spin(N);
+
     for (int i = 0; i < N; i++)
     {
-        for (int j = i+1; j < N; j++)
-        if(abs(Jz(i,j))>0)
+        int reminder = state % Ls;
+        state /= Ls;
+
+        double nt = reminder - 0.5;
+        spin[i] = nt;
+
+        D += -hz * nt;
+    }
+
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = i + 1; j < N; j++)
         {
-            D+= Jz(i,j)* nnt(i)* nnt(j);
+            if (Jz(i,j) != 0.0)
+                D += Jz(i,j).real() * spin[i] * spin[j];
         }
     }
-    //std::cout<< m <<"  |"<< nnt.transpose()<<">  "<<D<<endl;
-    //cout<< D <<endl;
-    
-    return D;
-}
 
+    return complex<double>(D, 0.0);
+}
 
 //================================================//
           //=== Hamiltonian Formation ===//
 //================================================//
+// void input::Hspin()
+// {
+//     H= MatrixXcd :: Zero(le,le);
+//     //#pragma omp parallel for
+//     //omp_set_num_threads(4);
+//     #pragma omp parallel for
+//     for (int i =ls ; i< le; i++)
+//     {
+//          H(i,i) = diagonal(i);
+//          insidehoping(i);    
+//         // outsidehoping(i);
+//     }
+   
+// }
+
+// void input::Hspin()
+// {
+//     H = MatrixXcd::Zero(le, le);
+
+//     #pragma omp parallel for schedule(dynamic)
+//     for(int i=ls; i<le; i++)
+//     {
+//         H(i,i) = diagonal(i);
+//         insidehoping(i);
+//     }
+
+//     //H = H.selfadjointView<Eigen::Upper>();
+// }
+//================================================//
+//================================================//
 void input::Hspin()
 {
-    H= MatrixXcd :: Zero(le,le);
-    //#pragma omp parallel for
-    //omp_set_num_threads(4);
-    #pragma omp parallel for
-    for (int i =ls ; i< le; i++)
+    H = MatrixXcd::Zero(le, le);
+
+    #pragma omp parallel for schedule(static)
+    for(int state = ls; state < le; state++)
     {
-         H(i,i) = diagonal(i);
-         insidehoping(i);    
-        // outsidehoping(i);
+        std::vector<int> spin(N);
+
+        int temp = state;
+        double diag = 0.0;
+
+        for(int i=0;i<N;i++)
+        {
+            spin[i] = temp % Ls;
+            temp /= Ls;
+
+            double sz = spin[i] - 0.5;
+            diag -= hz * sz;
+        }
+
+        for(int i=0;i<N;i++)
+        {
+            for(int j=i+1;j<N;j++)
+            {
+                if(Jz(i,j).real() != 0.0)
+                {
+                    double si = spin[i] - 0.5;
+                    double sj = spin[j] - 0.5;
+                    diag += Jz(i,j).real() * si * sj;
+                }
+            }
+        }
+
+        H(state,state) = diag;
+
+        for(int k1=0;k1<N;k1++)
+        {
+            for(int k2=k1+1;k2<N;k2++)
+            {
+                if(Jx(k1,k2).real() == 0.0)
+                    continue;
+
+                int q = state;
+
+                if(spin[k1] > 0)
+                    q -= Lspow[k1];
+                else
+                    q += Lspow[k1];
+
+                if(spin[k2] < Ls-1)
+                    q += Lspow[k2];
+                else
+                    q -= Lspow[k2];
+
+                if(q != state && q > state)
+                {
+                    H(state,q) = 0.25 * Jx(k1,k2);
+                }
+            }
+        }
     }
-   
+
+    H = H.selfadjointView<Eigen::Upper>();
 }
-//================================================//
-//================================================//
 #endif
 
 

@@ -42,13 +42,14 @@ void input::Sz()
         }
 
         total += local * weight;
+        //cout << "State: " << n << ", Local Sz: " << local << ", Weight: " << weight << endl;
     }
    
     
     file << hz << " "
          << J1 << " "
          << J2 << " "
-         << total << endl;
+         << total/double(N) << endl;
 }
 //================================================//
 //================================================//

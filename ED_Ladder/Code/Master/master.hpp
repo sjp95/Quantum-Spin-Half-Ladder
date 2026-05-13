@@ -43,9 +43,16 @@ void input::besis(int NN1,double Jjx,double Jjz,double hx0, double hy0, double h
     evs = MatrixXcd :: Zero(le,le);
     es = VectorXd :: Zero(le);
     //==============================//
+     // Precompute powers
+    Lspow.resize(N);
+    Lspow[0] = 1;
+
+    for(int i=1;i<N;i++)
+        Lspow[i] = Lspow[i-1] * Ls;
     cout<< "==============================="<<endl;
     cout<< "Data Alocation Done"<<endl;
     cout<< "==============================="<<endl;
+    
     Values();
 }
 
@@ -93,6 +100,12 @@ void input::mu_phi()
 
     bool loaded_from_file = false;
 
+    //basis_print();
+    //Hspin();
+
+    //cout << "===============================\n";
+    //cout << H << endl;
+    //cout << "===============================\n";
     //==========================================================
     // Try loading existing eigenspectrum
     //==========================================================
@@ -136,7 +149,7 @@ void input::mu_phi()
         cout << "H(0,0): " << H(0,0) << endl;
         cout << "===============================\n";
 
-        basis_print();
+        //basis_print();
 
         cout << "===============================\n";
         cout << "Diagonalizing Hamiltonian...\n";

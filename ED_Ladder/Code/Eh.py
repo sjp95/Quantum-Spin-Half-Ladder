@@ -27,7 +27,7 @@ J2 = int(float(sys.argv[3]) * 100) if len(sys.argv) > 3 else 100
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 data_dir = os.path.normpath(
-    os.path.join(base_dir, "..", "Data", "Eigen")
+    os.path.join(base_dir, "..", "Data", "Eigen", "Eigen")
 )
 
 pattern = f"EigenSpectrum_{N}_{J1}_{J2}_*.h5"

@@ -80,44 +80,96 @@ void input::basis_print()
 }
 //==========================================================================================//    
 
-void input:: mu_phi()
+void input::mu_phi()
 {
-    
-    Hspin();  
-    
+    bool tut = createDirectory("../Data/Eigen/Eigen");
 
-    cout<< "==============================="<<endl;
-    cout<< "H: "<<endl;
-    cout<< H(0,0) <<endl;
-    cout<< "==============================="<<endl;
-    basis_print();
-    cout<< "==============================="<<endl;
-    pair<MatrixXcd, VectorXd> e = Eigenspectrum(H);
-    es=e.second;
-    evs=e.first;
+    std::string outfile =
+        "../Data/Eigen/Eigen/EigenSpectrum_" +
+        std::to_string(N) + "_" +
+        std::to_string(int(J1 * 100.0)) + "_" +
+        std::to_string(int(J2 * 100.0)) + "_" +
+        std::to_string(int(hz * 100.0)) + ".h5";
 
-    bool tut=createDirectory("../Data/Eigen");
-    std::string outfile ="../Data/Eigen/EigenSpectrum_" + std::to_string(N) + "_" +    std::to_string(int(J1*100.0)) + "_" +    std::to_string(int(J2*100.0)) + "_" +    std::to_string(int(hz*100.0)) +  ".h5";
+    bool loaded_from_file = false;
 
-    try {
-        HighFive::File file(outfile, HighFive::File::Overwrite);
+    //==========================================================
+    // Try loading existing eigenspectrum
+    //==========================================================
+    if (std::filesystem::exists(outfile))
+    {
+        try
+        {
+            cout << "===============================\n";
+            cout << "Existing HDF5 file found.\n";
+            cout << "Loading eigenspectrum...\n";
+            cout << "===============================\n";
 
-        file.createDataSet("eigenvalues", es);
-        file.createDataSet("eigenvectors", evs);
-        cout << "HDF5 write successful\n";
+            HighFive::File file(outfile, HighFive::File::ReadOnly);
+
+            file.getDataSet("eigenvalues").read(es);
+            file.getDataSet("eigenvectors").read(evs);
+
+            // Free Hamiltonian memory
+            MatrixXcd().swap(H);
+
+            loaded_from_file = true;
+
+            cout << "HDF5 read successful\n";
+        }
+        catch (const std::exception& e)
+        {
+            cerr << "HDF5 Read Error: " << e.what() << endl;
+            cerr << "Recomputing eigenspectrum...\n";
+        }
     }
-    catch (const std::exception& e) {
-        cerr << "HDF5 Error: " << e.what() << endl;
+
+    //==========================================================
+    // Compute if file absent or read failed
+    //==========================================================
+    if (!loaded_from_file)
+    {
+        Hspin();
+
+        cout << "===============================\n";
+        cout << "H generated\n";
+        cout << "H(0,0): " << H(0,0) << endl;
+        cout << "===============================\n";
+
+        basis_print();
+
+        cout << "===============================\n";
+        cout << "Diagonalizing Hamiltonian...\n";
+        cout << "===============================\n";
+
+        pair<MatrixXcd, VectorXd> e = Eigenspectrum(H);
+
+        es = e.second;
+        evs = e.first;
+
+        try
+        {
+            HighFive::File file(outfile, HighFive::File::Overwrite);
+
+            file.createDataSet("eigenvalues", es);
+            file.createDataSet("eigenvectors", evs);
+
+            cout << "HDF5 write successful\n";
+        }
+        catch (const std::exception& e)
+        {
+            cerr << "HDF5 Write Error: " << e.what() << endl;
+        }
+
+        // Free Hamiltonian after diagonalization
+        MatrixXcd().swap(H);
     }
 
-    
-    //QFI(M_PI);
+    //==========================================================
+    // Observables
+    //==========================================================
     Sx();
     Sz();
-    
-    //cout<< es <<"\n"<<endl;
-    //cout<< evs.col(0) <<endl;
-    
 }
 //=======================================================//
 #endif

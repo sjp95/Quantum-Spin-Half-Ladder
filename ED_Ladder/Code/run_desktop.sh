@@ -67,11 +67,11 @@ cmake --build build -j$(nproc)
 
 echo "Starting execution with $MKL_NUM_THREADS threads..."
    
-for hz in 116 #{112..116..2} #$(seq 1.02 0.02 1.50) 
+for hz in {0..150..2} #$(seq 1.02 0.02 1.50) 
 do
  for Jz in 100.0 #$(seq 1.0 -0.02 0.0)
  do
-  ./build/s1 12 0 100.0 $Jz $hz 
+  ./build/s1 12 0.01 100.0 $Jz $hz 
  done
 done
 
@@ -85,15 +85,15 @@ done
 # done
 #-----------------------------------------------------------------------------#
 
- for Jz in 1.0 #$(seq 1.0 -0.02 0.0)
- do
-  python3 Ed2h.py 12 1.0 $Jz
-  python3 Mz.py 12 1.0 $Jz
-  cd ..
-  python3 plotEd2h.py 12 1.0 $Jz
-  python3 Mh.py 12 1.0 $Jz
-  cd Code
- done
+#  for Jz in 1.0 #$(seq 1.0 -0.02 0.0)
+#  do
+#   python3 Ed2h.py 12 1.0 $Jz
+#   python3 Mz.py 12 1.0 $Jz
+#   cd ..
+#   python3 plotEd2h.py 12 1.0 $Jz
+#   python3 Mh.py 12 1.0 $Jz
+#   cd Code
+#  done
 
 # python3 Ed2h.py 4 1.0 1.0
 # cd ..

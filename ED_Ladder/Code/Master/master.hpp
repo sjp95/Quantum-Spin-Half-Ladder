@@ -11,7 +11,7 @@
 #include "creat_directory.hpp"
 #include "Operators/sx.hpp"
 #include "Operators/sz.hpp"
-//#include "Operators/QFI.hpp"
+#include "Operators/QFI.hpp"
 // #include "Rotor/spinconverge.hpp"
 // #include "Rotor/oioj.hpp"
 
@@ -186,8 +186,9 @@ void input::mu_phi()
     //==========================================================
     // Observables
     //==========================================================
-    Sx();
-    Sz();
+    //Sx();
+    //Sz();
+    QFI(M_PI);
 }
 //=======================================================//
 #endif

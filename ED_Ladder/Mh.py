@@ -31,7 +31,6 @@ input_file = os.path.normpath(
         base_dir,
         "Data",
         "Magnetization",
-        "Sz",
         "CombinedSz",
         f"combined_sz_data_{J1}_{J2}_{N}.txt"
     )

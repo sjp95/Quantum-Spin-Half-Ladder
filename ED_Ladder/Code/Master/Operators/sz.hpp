@@ -16,13 +16,14 @@ void input::Sz()
     
     //------------------------------------------------//
     std::string outfile =
-        "../Data/Magnetization/Sz/Sz_" +
-        std::to_string(N) + "_" +
-        std::to_string(int(J1*100.0)) + "_" +
-        std::to_string(int(J2*100.0)) + "_" +
-        std::to_string(int(hz*100.0)) + ".dat";
+    "../Data/Magnetization/Sz/Sz_" +
+    std::to_string(N) + "_" +
+    std::to_string(static_cast<int>(std::round(J1 * 100.0))) + "_" +
+    std::to_string(static_cast<int>(std::round(J2 * 100.0))) + "_" +
+    std::to_string(static_cast<int>(std::round(hz * 100.0))) + ".dat";
 
     std::ofstream file(outfile);
+    file << std::scientific << std::setprecision(17);
     //------------------------------------------------//
 
     double total = 0.0;

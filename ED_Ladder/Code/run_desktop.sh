@@ -45,7 +45,7 @@
 # This script compiles and runs the desktop version of the program With MKL
 #=============================================================================#
 
-#!/bin/bash
+!/bin/bash
 set -e
 
 # Initialize oneAPI environment for runtime libraries
@@ -66,18 +66,34 @@ cmake -S . -B build
 cmake --build build -j$(nproc)
 
 echo "Starting execution with $MKL_NUM_THREADS threads..."
-# for hz in 0.7 #$(seq 0.52 0.02 0.7) 
-# do
-# ./build/s1 12 0 1 1 $hz
-# done    
-
-for hz in $(seq 0.82 0.02 1.0) 
+   
+for hz in 116 #{112..116..2} #$(seq 1.02 0.02 1.50) 
 do
- for Jz in 1.0 #$(seq 1.0 -0.02 0.0)
+ for Jz in 100.0 #$(seq 1.0 -0.02 0.0)
  do
-  ./build/s1 12 0 1.0 $Jz $hz 
+  ./build/s1 12 0 100.0 $Jz $hz 
  done
 done
+
+# for i in $(seq 112 2 116)
+# do
+#     printf -v hz "%d.%02d" $((i/100)) $((i%100))
+#     for Jz in 1.0
+#     do
+#         ./build/s1 12 0 1.0 "$Jz" "$hz"
+#     done
+# done
+#-----------------------------------------------------------------------------#
+
+ for Jz in 1.0 #$(seq 1.0 -0.02 0.0)
+ do
+  python3 Ed2h.py 12 1.0 $Jz
+  python3 Mz.py 12 1.0 $Jz
+  cd ..
+  python3 plotEd2h.py 12 1.0 $Jz
+  python3 Mh.py 12 1.0 $Jz
+  cd Code
+ done
 
 # python3 Ed2h.py 4 1.0 1.0
 # cd ..

@@ -17,9 +17,9 @@ int main(int argc,char* argv[])
 
     int N=atoi(argv[1]);
     double T=atof(argv[2]);
-    double J1=atof(argv[3]);
-    double J2=atof(argv[4]);
-    double hz=atof(argv[5]);
+    double J1=atof(argv[3])/100.0;
+    double J2=atof(argv[4])/100.0;
+    double hz=atof(argv[5])/100.0;
 
     input Data;
     Data.T=T;

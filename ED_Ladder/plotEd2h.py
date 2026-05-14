@@ -81,7 +81,7 @@ plt.savefig(
     dpi=300
 )
 
-plt.show()
+#plt.show()
 
 # ============================================================
 # Plot 2: Second derivative
@@ -107,4 +107,4 @@ plt.savefig(
     dpi=300
 )
 
-plt.show()
+#plt.show()

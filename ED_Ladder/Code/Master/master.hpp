@@ -92,18 +92,23 @@ void input::mu_phi()
     bool tut = createDirectory("../Data/Eigen/Eigen");
 
     std::string outfile =
-        "../Data/Eigen/Eigen/EigenSpectrum_" +
-        std::to_string(N) + "_" +
-        std::to_string(int(J1 * 100.0)) + "_" +
-        std::to_string(int(J2 * 100.0)) + "_" +
-        std::to_string(int(hz * 100.0)) + ".h5";
-
+    "../Data/Eigen/Eigen/EigenSpectrum_" +
+    std::to_string(N) + "_" +
+    std::to_string(static_cast<int>(std::round(J1 * 100.0))) + "_" +
+    std::to_string(static_cast<int>(std::round(J2 * 100.0))) + "_" +
+    std::to_string(static_cast<int>(std::round(hz * 100.0))) + ".h5";
     bool loaded_from_file = false;
 
     //basis_print();
     //Hspin();
 
     //cout << "===============================\n";
+    cout << "===============================\n";
+    cout << "hz: " << hz << endl;
+    cout << "Jx: " << J1 << endl;
+    cout << "Jz: " << J2 << endl;
+    cout << "Output file: " << outfile << endl;
+    cout << "===============================\n";
     //cout << H << endl;
     //cout << "===============================\n";
     //==========================================================

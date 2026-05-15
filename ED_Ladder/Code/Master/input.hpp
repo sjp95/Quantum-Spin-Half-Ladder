@@ -36,6 +36,7 @@ class input
         double J2=1.0;
         double t1=0.0;
         double T = 0.1;       // Temperature                    | D
+        string bc;
         
         void besis(int NN1,double Jjx,double Jjz,double hx0, double hy0, double hz0);
         void Values();
@@ -61,6 +62,7 @@ class input
         //======================================================//
         double Fermi(double e,double m);
         double delta(double x0, double x);
+        
         // //=======================================================//
         // void Fermi_dos();
         // void Spin_dos();

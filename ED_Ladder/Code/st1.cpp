@@ -20,11 +20,20 @@ int main(int argc,char* argv[])
     double J1=atof(argv[3])/100.0;
     double J2=atof(argv[4])/100.0;
     double hz=atof(argv[5])/100.0;
+    
 
     input Data;
     Data.T=T;
     Data.J1=J1;
     Data.J2=J2;
+    if(argc > 6)
+    {
+        Data.bc = argv[6];
+    }
+    else
+    {
+        Data.bc = "obc";
+    }
     Data.besis(N,J1,J2,0.0,0.0,hz);
    // Data.Values();
     Data.mu_phi();

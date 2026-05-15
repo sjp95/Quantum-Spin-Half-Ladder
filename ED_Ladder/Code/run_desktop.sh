@@ -55,7 +55,7 @@ fi
 
 # Performance tuning: Use all physical cores
 export MKL_NUM_THREADS=$(nproc)
-export OMP_NUM_THREADS=$(nproc)
+export OMP_NUM_THREADS=2 #$(nproc)
 
 # Force Eigen to use MKL backend (if s3.cpp includes Eigen)
 export EIGEN_USE_MKL_ALL=1
@@ -71,7 +71,7 @@ for hz in {0..150..2} #$(seq 1.02 0.02 1.50)
 do
  for Jz in 100.0 #$(seq 1.0 -0.02 0.0)
  do
-  ./build/s1 12 0.01 100.0 $Jz $hz 
+  ./build/s1 12 0.0 100.0 $Jz $hz pbc
  done
 done
 
@@ -85,15 +85,15 @@ done
 # done
 #-----------------------------------------------------------------------------#
 
-#  for Jz in 1.0 #$(seq 1.0 -0.02 0.0)
-#  do
-#   python3 Ed2h.py 12 1.0 $Jz
-#   python3 Mz.py 12 1.0 $Jz
-#   cd ..
-#   python3 plotEd2h.py 12 1.0 $Jz
-#   python3 Mh.py 12 1.0 $Jz
-#   cd Code
-#  done
+ for Jz in 1.0 #$(seq 1.0 -0.02 0.0)
+ do
+  python3 Ed2h.py 12 1.0 $Jz
+  python3 Mz.py 12 1.0 $Jz
+  cd ..
+  python3 plotEd2h.py 12 1.0 $Jz
+  python3 Mh.py 12 1.0 $Jz
+  cd Code
+ done
 
 # python3 Ed2h.py 4 1.0 1.0
 # cd ..

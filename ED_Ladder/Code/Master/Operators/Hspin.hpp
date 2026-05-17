@@ -148,6 +148,12 @@ void input::Hspin()
 
                 int q = state;
 
+                //q = q + (spin[k1] == 0 ? Lspow[k1] : -Lspow[k1]);
+                //q = q + (spin[k3] == 0 ? Lspow[k2] : -Lspow[k2]);
+
+                // q = q + (1 - 2*spin[k1]) * Lspow[k1]; // Spin half only
+                // q = q + (1 - 2*spin[k2]) * Lspow[k2]; // Spin half only
+
                 if(spin[k1] > 0)
                     q -= Lspow[k1];
                 else
@@ -160,9 +166,24 @@ void input::Hspin()
 
                 if(q != state && q > state)
                 {
-                    H(state,q) = 0.25 * Jx(k1,k2);
+                    H(state,q)+ = 0.25 * Jx(k1,k2);
                 }
             }
+           //======================================//
+                // hx, hy terms
+           //======================================//
+            int q = state;
+            //int q = state + (spin[k1] == 0 ? Lspow[k1] : -Lspow[k1]);
+            //int q = state + (1 - 2*spin[k1]) * Lspow[k1]; // Spin half only
+             if(spin[k1] == 0)
+                q += Lspow[k1];
+            else
+                q -= Lspow[k1];
+            if(q != state && q > state)
+            {
+                H(state,q) += -0.5 * hx;
+            }
+            //======================================//
         }
     }
 

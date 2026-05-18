@@ -4,14 +4,14 @@ import sys
 
 # ============================================================
 # Usage:
-# python3 combine_sx.py N [J1] [J2]
+# python3 combine_sz.py N [J1] [J2]
 #
 # Example:
-# python3 combine_sx.py 4 1.0 1.0
+# python3 combine_sz.py 4 1.0 1.0
 # ============================================================
 
 if len(sys.argv) < 2:
-    print("Usage: python3 combine_sx.py N [J1] [J2]")
+    print("Usage: python3 combine_sz.py N [J1] [J2]")
     sys.exit(1)
 
 N = int(sys.argv[1])
@@ -28,7 +28,7 @@ hy = int(float(sys.argv[5]) * 100) if len(sys.argv) > 5 else 100
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 data_dir = os.path.normpath(
-    os.path.join(base_dir, "..", "Data", "Magnetization", "Sx")
+    os.path.join(base_dir, "..", "Data", "Magnetization", "Sz")
 )
 
 pattern = f"Sz_{N}_{J1}_{J2}_{hx}_{hy}_*.dat"
@@ -54,7 +54,7 @@ file_paths.sort(key=extract_hz)
 # Output
 # ============================================================
 
-output_dir = os.path.join(data_dir, "..", "CombinedSx")
+output_dir = os.path.join(data_dir, "..", "CombinedSz")
 os.makedirs(output_dir, exist_ok=True)
 
 output_file = os.path.join(
@@ -99,4 +99,4 @@ with open(output_file, "w") as outfile:
     for line in all_data_lines:
         outfile.write(line + "\n")
 
-print(f"\nCombined Sx data written to:\n{output_file}")
+print(f"\nCombined Sz data written to:\n{output_file}")

@@ -96,6 +96,8 @@ void input::mu_phi()
     std::to_string(N) + "_" +
     std::to_string(static_cast<int>(std::round(J1 * 100.0))) + "_" +
     std::to_string(static_cast<int>(std::round(J2 * 100.0))) + "_" +
+    std::to_string(static_cast<int>(std::round(hx * 100.0))) + "_" +
+    std::to_string(static_cast<int>(std::round(hy * 100.0))) + "_" +
     std::to_string(static_cast<int>(std::round(hz * 100.0))) + ".h5";
     bool loaded_from_file = false;
 
@@ -104,6 +106,8 @@ void input::mu_phi()
 
     //cout << "===============================\n";
     cout << "===============================\n";
+    cout << "hx: " << hx << endl;
+    cout << "hy: " << hy << endl;
     cout << "hz: " << hz << endl;
     cout << "Jx: " << J1 << endl;
     cout << "Jz: " << J2 << endl;

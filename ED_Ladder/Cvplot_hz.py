@@ -24,7 +24,8 @@ if len(sys.argv) < 2:
 N = int(sys.argv[1])
 J1 = int(round(float(sys.argv[2]) * 100)) if len(sys.argv) > 2 else 100
 J2 = int(round(float(sys.argv[3]) * 100)) if len(sys.argv) > 3 else 100
-
+hx = int(round(float(sys.argv[4]) * 100)) if len(sys.argv) > 4 else 100
+hy = int(round(float(sys.argv[5]) * 100)) if len(sys.argv) > 5 else 100
 hz_filter = None
 
 if len(sys.argv) > 4:

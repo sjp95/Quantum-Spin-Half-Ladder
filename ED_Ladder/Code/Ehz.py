@@ -19,6 +19,8 @@ N = int(sys.argv[1])
 
 J1 = int(float(sys.argv[2]) * 100) if len(sys.argv) > 2 else 100
 J2 = int(float(sys.argv[3]) * 100) if len(sys.argv) > 3 else 100
+hx = int(float(sys.argv[4]) * 100) if len(sys.argv) > 4 else 100
+hy = int(float(sys.argv[5]) * 100) if len(sys.argv) > 5 else 100
 
 # ============================================================
 # Paths
@@ -30,7 +32,7 @@ data_dir = os.path.normpath(
     os.path.join(base_dir, "..", "Data", "Eigen", "Eigen")
 )
 
-pattern = f"EigenSpectrum_{N}_{J1}_{J2}_*.h5"
+pattern = f"EigenSpectrum_{N}_{J1}_{J2}_{hx}_{hy}_*.h5"
 
 file_paths = glob.glob(os.path.join(data_dir, pattern))
 
@@ -60,7 +62,7 @@ os.makedirs(output_dir, exist_ok=True)
 
 output_file = os.path.join(
     output_dir,
-    f"combined_energy_data_{J1}_{J2}_{N}.txt"
+    f"combined_energy_data_{J1}_{J2}_{hx}_{hy}_{N}.txt"
 )
 
 # ============================================================
@@ -79,7 +81,7 @@ with open(output_file, "w") as outfile:
                 ground_energy = float(eigenvalues.flatten()[0])
 
                 outfile.write(
-                    f"{hz/100.0} {J1/100.0} {J2/100.0} {ground_energy}\n"
+                    f"{hz/100.0} {hx/100.0} {hy/100.0} {J1/100.0} {J2/100.0} {ground_energy}\n"
                 )
 
             print(f"Processed: {os.path.basename(filepath)}")

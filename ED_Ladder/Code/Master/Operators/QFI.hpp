@@ -36,6 +36,8 @@ void input::QFI(double qx)
         std::to_string(N) + "_" +
         std::to_string(static_cast<int>(std::round(J1 * 100.0))) + "_" +
         std::to_string(static_cast<int>(std::round(J2 * 100.0))) + "_" +
+        std::to_string(static_cast<int>(std::round(hx * 100.0))) + "_" +
+        std::to_string(static_cast<int>(std::round(hy * 100.0))) + "_" +
         std::to_string(static_cast<int>(std::round(hz * 100.0))) + "_" +
         std::to_string(static_cast<int>(std::round(T * 100.0))) + ".dat";
 

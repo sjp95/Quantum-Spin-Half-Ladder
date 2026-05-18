@@ -4,20 +4,22 @@ import sys
 
 # ============================================================
 # Usage:
-# python3 combine_sx.py N [J1] [J2]
+# python3 combine_sz.py N [J1] [J2]
 #
 # Example:
-# python3 combine_sx.py 4 1.0 1.0
+# python3 combine_sz.py 4 1.0 1.0
 # ============================================================
 
 if len(sys.argv) < 2:
-    print("Usage: python3 combine_sx.py N [J1] [J2]")
+    print("Usage: python3 combine_sz.py N [J1] [J2]")
     sys.exit(1)
 
 N = int(sys.argv[1])
 
 J1 = int(float(sys.argv[2]) * 100) if len(sys.argv) > 2 else 100
 J2 = int(float(sys.argv[3]) * 100) if len(sys.argv) > 3 else 100
+hy = int(float(sys.argv[4]) * 100) if len(sys.argv) > 4 else 100
+hz = int(float(sys.argv[5]) * 100) if len(sys.argv) > 5 else 100
 
 # ============================================================
 # Paths
@@ -29,7 +31,7 @@ data_dir = os.path.normpath(
     os.path.join(base_dir, "..", "Data", "Magnetization", "Sx")
 )
 
-pattern = f"Sx_{N}_{J1}_{J2}_*.dat"
+pattern = f"Sx_{N}_{J1}_{J2}_*_{hy}_{hz}.dat"
 
 file_paths = glob.glob(os.path.join(data_dir, pattern))
 
@@ -57,7 +59,7 @@ os.makedirs(output_dir, exist_ok=True)
 
 output_file = os.path.join(
     output_dir,
-    f"combined_sx_data_{J1}_{J2}_{N}.txt"
+    f"combined_sx_data_{J1}_{J2}_{hy}_{hz}_{N}.txt"
 )
 
 # ============================================================

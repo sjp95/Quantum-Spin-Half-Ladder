@@ -20,6 +20,8 @@ N = int(sys.argv[1])
 
 J1 = int(float(sys.argv[2]) * 100) if len(sys.argv) > 2 else 100
 J2 = int(float(sys.argv[3]) * 100) if len(sys.argv) > 3 else 100
+hx = int(float(sys.argv[4]) * 100) if len(sys.argv) > 4 else 100
+hy = int(float(sys.argv[5]) * 100) if len(sys.argv) > 5 else 100
 
 # ============================================================
 # Paths
@@ -31,7 +33,7 @@ data_dir = os.path.normpath(
     os.path.join(base_dir, "..", "Data", "Eigen", "Eigen")
 )
 
-pattern = f"EigenSpectrum_{N}_{J1}_{J2}_*.h5"
+pattern = f"EigenSpectrum_{N}_{J1}_{J2}_{hx}_{hy}_*.h5"
 
 file_paths = glob.glob(os.path.join(data_dir, pattern))
 
@@ -62,12 +64,12 @@ os.makedirs(derivative_dir, exist_ok=True)
 
 combined_output = os.path.join(
     combined_dir,
-    f"combined_energy_data_{J1}_{J2}_{N}.txt"
+    f"combined_energy_data_{J1}_{J2}_{hx}_{hy}_{N}.txt"
 )
 
 derivative_output = os.path.join(
     derivative_dir,
-    f"second_derivative_energy_data_{J1}_{J2}_{N}.txt"
+    f"second_derivative_energy_data_{J1}_{J2}_{hx}_{hy}_{N}.txt"
 )
 
 # ============================================================
@@ -91,7 +93,7 @@ with open(combined_output, "w") as outfile:
             energy_values.append(ground_energy)
 
             outfile.write(
-                f"{hz} {J1/100.0} {J2/100.0} {ground_energy}\n"
+                f"{hx/100.0} {hy/100.0} {hz} {J1/100.0} {J2/100.0} {ground_energy}\n"
             )
 
             print(f"Processed: {os.path.basename(filepath)}")
@@ -148,7 +150,7 @@ second_derivative = second_derivative_4th_order(hz_values, energy_values)
 with open(derivative_output, "w") as outfile:
     for hz, d2e in zip(hz_values, second_derivative):
         outfile.write(
-            f"{hz} {J1/100.0} {J2/100.0} {d2e}\n"
+            f"{hx/100.0} {hy/100.0} {hz} {J1/100.0} {J2/100.0} {d2e}\n"
         )
 
 print(f"Second derivative data written to:\n{derivative_output}")

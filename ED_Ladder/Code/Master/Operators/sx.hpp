@@ -155,6 +155,8 @@ void input::Sx()
     std::to_string(N) + "_" +
     std::to_string(static_cast<int>(std::round(J1 * 100.0))) + "_" +
     std::to_string(static_cast<int>(std::round(J2 * 100.0))) + "_" +
+    std::to_string(static_cast<int>(std::round(hx * 100.0))) + "_" +
+    std::to_string(static_cast<int>(std::round(hy * 100.0))) + "_" +
     std::to_string(static_cast<int>(std::round(hz * 100.0))) + ".dat";
 
     std::ofstream file(outfile);
@@ -194,11 +196,13 @@ void input::Sx()
         total += local;
     }
 
-    file << hz << " "
-         << J1 << " "
-         << J2 << " "
-         << total/double(N)
-         << std::endl;
+    file << hx << " "
+            << hy << " "
+            << hz << " "
+            << J1 << " "
+            << J2 << " "
+            << total/double(N)
+            << std::endl;
 }
 //========================================================================================//
 //========================================================================================//

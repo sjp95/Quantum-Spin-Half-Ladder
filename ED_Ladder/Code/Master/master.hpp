@@ -12,6 +12,7 @@
 #include "Operators/sx.hpp"
 #include "Operators/sz.hpp"
 #include "Operators/QFI.hpp"
+#include "Operators/D.hpp"
 // #include "Rotor/spinconverge.hpp"
 // #include "Rotor/oioj.hpp"
 
@@ -192,7 +193,8 @@ void input::mu_phi()
     //==========================================================
     Sx();
     Sz();
-    QFI(M_PI);
+    //QFI(M_PI);
+    D();
 }
 //=======================================================//
 #endif

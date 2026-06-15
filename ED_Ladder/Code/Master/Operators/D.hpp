@@ -51,7 +51,7 @@ void input::D()
 
         double local = 0.0;
 
-        for(int r=0;r<N;r++)
+        for(int r=N/2;r<N/2+1;r++)
         {
             //----------------------------------
             // lattice coordinates
@@ -102,7 +102,7 @@ void input::D()
     }
     //========================================================================//
 
-    Dval /= double(N);
+    //Dval /= double(N);
 
     file << hx << " "
          << hy << " "

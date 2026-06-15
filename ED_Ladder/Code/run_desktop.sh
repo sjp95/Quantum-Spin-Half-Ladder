@@ -75,25 +75,24 @@ echo "Starting execution with $MKL_NUM_THREADS threads..."
 #  done
 # done
 
-# for i in $(seq 112 2 116)
-# do
-#     printf -v hz "%d.%02d" $((i/100)) $((i%100))
-#     for Jz in 1.0
-#     do
-#         ./build/s1 12 0 1.0 "$Jz" "$hz"
-#     done
-# done
+for hz in {0..150..2} #$(seq 1.02 0.02 1.50) 
+do
+ for Jz in 100.0 #$(seq 1.0 -0.02 0.0)
+ do
+  ./build/s1 12 0.0 100.0 $Jz $hz pbc
+ done
+done
 #-----------------------------------------------------------------------------#
 
- for Jz in 1.0 #$(seq 1.0 -0.02 0.0)
- do
-  python3 Ed2hx.py 12 1.0 $Jz 0 0
-  #python3 Mx.py 12 1.0 $Jz 0 0
-  cd ..
-  python3 plotEd2hx.py 12 1.0 $Jz 0 0
-  python3 Mhx.py 12 1.0 $Jz 0.0 0
-  cd Code
- done
+#  for Jz in 1.0 #$(seq 1.0 -0.02 0.0)
+#  do
+#   python3 Ed2hx.py 12 1.0 $Jz 0 0
+#   #python3 Mx.py 12 1.0 $Jz 0 0
+#   cd ..
+#   python3 plotEd2hx.py 12 1.0 $Jz 0 0
+#   python3 Mhx.py 12 1.0 $Jz 0.0 0
+#   cd Code
+#  done
 
 # python3 Ed2h.py 4 1.0 1.0
 # cd ..

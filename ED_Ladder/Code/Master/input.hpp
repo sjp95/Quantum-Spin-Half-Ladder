@@ -55,6 +55,7 @@ class input
         void Sx();
         void Sz();
         void QFI(double qx);
+        void D();
     public:
         // void total_converge(double U1);
         // void U_phi(double U1);

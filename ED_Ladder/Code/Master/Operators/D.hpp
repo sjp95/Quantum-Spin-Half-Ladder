@@ -22,6 +22,7 @@ using namespace Eigen;
 
 void input::D()
 {
+    //========================================================================//
     createDirectory("../Data/Nematic");
 
     std::string outfile =
@@ -36,18 +37,17 @@ void input::D()
 
     std::ofstream file(outfile);
     file << std::scientific << std::setprecision(17);
-
+    //========================================================================//
     const auto* psi = evs.col(0).data();
 
     double Dval = 0.0;
 
     int Nx = N/2;
-
+    //========================================================================//
     #pragma omp parallel for reduction(+:Dval) schedule(static)
     for(int n=0;n<le;n++)
     {
-        double prob =
-        std::norm(psi[n]);
+        double prob = std::norm(psi[n]);
 
         double local = 0.0;
 
@@ -82,36 +82,25 @@ void input::D()
             q += (1-2*sr )*Lspow[r ];
             q += (1-2*srx)*Lspow[rx];
 
-            double sxsx =
-            0.25*
-            std::real(
-            std::conj(psi[q])*
-            psi[n]
-            );
+            double sxsx = 0.25*std::real(std::conj(psi[q])*psi[n]);
 
             //----------------------------------
             // <Sz_r Sz_rz>
             //----------------------------------
 
-            double szr =
-            sr - 0.5;
+            double szr =sr - 0.5;
+            double szrz =((n/Lspow[rz])%2)-0.5;
 
-            double szrz =
-            ((n/Lspow[rz])%2)-0.5;
-
-            double szsz =
-            prob*
-            szr*
-            szrz;
+            double szsz =prob*szr*szrz;
 
             //----------------------------------
 
-            local +=
-            4.0*(sxsx - szsz);
+            local += 4.0*(sxsx - szsz);
         }
 
         Dval += local;
     }
+    //========================================================================//
 
     Dval /= double(N);
 
@@ -122,11 +111,12 @@ void input::D()
          << J2 << " "
          << Dval
          << std::endl;
-
+    //========================================================================//
     std::cout
     << "Nematic order D = "
     << Dval
     << std::endl;
+    //========================================================================//
 }
 
 #endif

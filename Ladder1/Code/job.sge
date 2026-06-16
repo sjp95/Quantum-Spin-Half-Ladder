@@ -1,9 +1,0 @@
-#PBS  -N  Kiatev_60_31
-#PBS -l nodes=1:ppn=1
-#PBS -j oe 
-#PBS -o out.log
-#PBS -e err.log
-cd $PBS_O_WORKDIR
-date
-julia test2.jl 60 1 1 1 60 31 -1.0
-date

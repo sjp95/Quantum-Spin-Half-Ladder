@@ -13,5 +13,15 @@
 *.h5
 *.sge
 *.log
+*.sh
 bin/
 build/
+
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.out

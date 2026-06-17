@@ -45,7 +45,7 @@
 # This script compiles and runs the desktop version of the program With MKL
 #=============================================================================#
 
-!/bin/bash
+#!/bin/bash
 set -e
 
 # Initialize oneAPI environment for runtime libraries
@@ -75,7 +75,7 @@ echo "Starting execution with $MKL_NUM_THREADS threads..."
 #  done
 # done
 
-for hz in 0 #{0..150..2} #$(seq 1.02 0.02 1.50) 
+for hz in  2 4 6 8 10  #{0..150..2} #$(seq 1.02 0.02 1.50) 
 do
  for Jz in {152..250..2} #$(seq 1.0 -0.02 0.0)
  do
@@ -99,7 +99,7 @@ done
 # cd ..
 #python3 plotEd2h.py 4 1.0 1.0
 
-python3 nematic_Jz.py 12 1 0 0 0
+#python3 nematic_Jz.py 12 1 0 0 0
 #=============================================================================#
 # Alternative
 #=============================================================================#

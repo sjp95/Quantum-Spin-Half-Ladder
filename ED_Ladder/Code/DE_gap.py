@@ -1,4 +1,3 @@
-```python
 import os
 import glob
 import sys
@@ -462,4 +461,4 @@ else:
         "mode must be: "
         "energy, gap, or d2"
     )
-```
+

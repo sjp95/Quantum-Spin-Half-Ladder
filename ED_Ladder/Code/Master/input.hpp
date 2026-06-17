@@ -57,6 +57,7 @@ class input
         void Sz();
         void QFI(double qx);
         void D();
+        void Chirality();
     public:
         // void total_converge(double U1);
         // void U_phi(double U1);

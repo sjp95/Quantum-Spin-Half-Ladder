@@ -13,6 +13,7 @@
 #include "Operators/sz.hpp"
 #include "Operators/QFI.hpp"
 #include "Operators/D.hpp"
+#include "Operators/Chirality.hpp"
 // #include "Rotor/spinconverge.hpp"
 // #include "Rotor/oioj.hpp"
 
@@ -195,6 +196,7 @@ void input::mu_phi()
     // Sz();
     //QFI(M_PI);
     D();
+    Chirality();
 }
 //=======================================================//
 #endif

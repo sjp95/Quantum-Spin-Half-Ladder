@@ -77,25 +77,25 @@ def main():
         Jz_mat[k, kyp] = J2
         Jz_mat[kyp, k] = J2
 
-    # 2. Build qkrylov OpSum Hamiltonian
+    # 2. Build qkrylov OpSum Hamiltonian using user's preferred tuple syntax
     ops = qkrylov.OpSum()
 
-    # Add unique leg (Jx) and rung (Jz) couplings (loop over j > i to avoid double counting)
+    # Add unique leg (Jx) and rung (Jz) couplings
     for i in range(N):
         for j in range(i + 1, N):
             if Jx_mat[i, j] != 0.0:
-                ops.add_term(Jx_mat[i, j], 'Sx', i, 'Sx', j)
+                ops += Jx_mat[i, j], 'Sx', i, 'Sx', j
             if Jz_mat[i, j] != 0.0:
-                ops.add_term(Jz_mat[i, j], 'Sz', i, 'Sz', j)
+                ops += Jz_mat[i, j], 'Sz', i, 'Sz', j
 
     # Add magnetic field terms
     for i in range(N):
         if hx != 0.0:
-            ops.add_term(-hx, 'Sx', i)
+            ops += -hx, 'Sx', i
         if hy != 0.0:
-            ops.add_term(-hy, 'Sy', i)
+            ops += -hy, 'Sy', i
         if hz != 0.0:
-            ops.add_term(-hz, 'Sz', i)
+            ops += -hz, 'Sz', i
 
     H = qkrylov.MatrixFreeHamiltonian(basis, site, ops)
     print("===============================")

@@ -75,9 +75,9 @@ echo "Starting execution with $MKL_NUM_THREADS threads..."
 #  done
 # done
 
-for hz in  2 4 6 8 10  #{0..150..2} #$(seq 1.02 0.02 1.50) 
+for hz in  50 20 80 150  #{0..150..2} #$(seq 1.02 0.02 1.50) 
 do
- for Jz in {152..250..2} #$(seq 1.0 -0.02 0.0)
+ for Jz in {0..150..2} #$(seq 1.0 -0.02 0.0)
  do
   ./build/s1 12 0.0 100.0 $Jz 0.0 0.0 $hz pbc 
  done

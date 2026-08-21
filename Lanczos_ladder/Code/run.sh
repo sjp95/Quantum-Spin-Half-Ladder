@@ -7,18 +7,18 @@ export OMP_NUM_THREADS=$(nproc)
 
 echo "Starting execution of Python qkrylov model..."
 
-for hz in  50 20 80 150
+for hz in  0 #$50 20 80 150
 do
- for Jz in {0..150..2}
+ for Jz in {0..250..2}
  do
-  python3 st1.py 12 0.0 100.0 $Jz 0.0 0.0 $hz pbc
+  python3 st1.py 20 0.0 100.0 $Jz 0.0 0.0 $hz pbc
  done
 done
 
 # ==========================================================
 # Run DE_gap.py for analyzing energy and gap
 # ==========================================================
-N=12
+N=20
 for Md in "energy" "gap" "d2"
 do
     MODE=$Md
@@ -26,7 +26,7 @@ do
     J1=1.0
     J2=0.0
 
-    for hz in  0.5 0.2 0.8 1.5
+    for hz in  0.0 #0.5 0.2 0.8 1.5
     do
         HX=0.0
         HY=0.0
@@ -63,12 +63,12 @@ done
 # ==========================================================
 # Run combine_nematic.py to process Nematic order data
 # ==========================================================
-N=12
+N=20
 SWEEP="J2"
 J1=1.0
 J2=0.0
 
-for hz in  0.5 0.2 0.8 1.5
+for hz in  0.0 #0.5 0.2 0.8 1.5
 do
         HX=0.0
         HY=0.0
@@ -101,12 +101,12 @@ done
 # ==========================================================
 # Run combine_chirality.py to process Chirality data
 # ==========================================================
-N=12
+N=20
 SWEEP="J2"
 J1=1.0
 J2=1.0
 
-for hz in  0.5 0.2 0.8 1.5
+for hz in  0.0 #0.5 0.2 0.8 1.5
 do
     HX=0.0
     HY=0.0
@@ -140,10 +140,10 @@ done
 # ==========================================================
 # Run PlotObservables.py to plot observables
 # ==========================================================
-N=12
+N=20
 SWEEP="J2"
 FIX_PARAMETER="hz"
-FIX_VALUES="0.0, 0.04, 0.1, 0.5, 0.8, 1.5"
+FIX_VALUES="0.0" #, 0.04, 0.1, 0.5, 0.8, 1.5"
 
 J1=1.0
 J2=1.0

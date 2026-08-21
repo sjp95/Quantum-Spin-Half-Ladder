@@ -59,10 +59,18 @@ hz = float(sys.argv[9])
 
 plt.rcParams["font.size"] = 20
 
-try:
-    plt.rcParams["font.family"] = "Times New Roman"
-except:
-    pass
+# ==========================================================
+# Style
+# ==========================================================
+
+plt.rcParams["font.size"] = 20
+plt.rcParams["font.family"] = "serif"
+plt.rcParams["font.serif"] = ["Times New Roman"] + plt.rcParams["font.serif"]
+
+# try:
+#     plt.rcParams["font.family"] = "Times New Roman"
+# except:
+#     pass
 
 # ==========================================================
 # Helpers
@@ -441,7 +449,7 @@ for fixed in FIX_VALUES:
 
 ylabel_list = [
     "Gap",
-    "\langl D \rangl",
+    r"$\langle D \rangle$",
     r"$|X|$",
     r"$d^2E/dx^2$"
 ]
